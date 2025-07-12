@@ -72,18 +72,9 @@ class AppTheme {
         fontWeight: FontWeight.w600,
         color: Colors.black,
       ),
-      bodyLarge: TextStyle(
-        fontSize: 16,
-        color: Colors.black87
-      ),
-      bodyMedium: TextStyle(
-        fontSize: 14,
-        color: Colors.black87
-      ),
-      labelMedium: TextStyle(
-        fontSize: 12,
-        color: Colors.grey
-      )
+      bodyLarge: TextStyle(fontSize: 16, color: Colors.black87),
+      bodyMedium: TextStyle(fontSize: 14, color: Colors.black87),
+      labelMedium: TextStyle(fontSize: 12, color: Colors.grey),
     ),
 
     // Button Theme
@@ -93,13 +84,8 @@ class AppTheme {
         foregroundColor: Colors.black87,
         elevation: 0,
         padding: const EdgeInsets.symmetric(vertical: 16),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        textStyle: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
       ),
     ),
   );

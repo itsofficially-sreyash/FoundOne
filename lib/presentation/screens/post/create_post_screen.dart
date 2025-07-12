@@ -1,6 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:found_one/presentation/widgets/custom_button.dart';
 import 'package:found_one/presentation/widgets/custom_text_field.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CreatePostScreen extends StatefulWidget {
   const CreatePostScreen({super.key});
@@ -15,8 +18,28 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   final TextEditingController descController = TextEditingController();
   File? _image;
 
-  Future<void> _pickImage() async{
-    
+  List<Widget> type = <Widget>[Text("Sale"), Text("Lost")];
+
+  final List<bool> _selectedType = <bool>[true, false];
+
+  Future<void> _pickImage() async {
+    final pickedFile = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+    );
+
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+    } else {
+      print("No image selected");
+    }
+  }
+
+  void _removeImage() {
+    setState(() {
+      _image = null;
+    });
   }
 
   @override
@@ -102,6 +125,101 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           ),
                         ),
                         SizedBox(height: 10),
+                        _image == null
+                            ? Container()
+                            : ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Container(
+                                  width: 100,
+                                  height: 100,
+                                  child: Image.file(_image!),
+                                ),
+                              ),
+                        SizedBox(height: 20),
+                        Row(
+                          children: [
+                            Container(
+                              width: 300,
+                              child: OutlinedButton(
+                                onPressed: _pickImage,
+                                child: Text("Tap to add photo"),
+                                style: ButtonStyle(
+                                  shape:
+                                      MaterialStateProperty.all<
+                                        RoundedRectangleBorder
+                                      >(
+                                        RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            10,
+                                          ),
+                                        ),
+                                      ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 10),
+                            OutlinedButton(
+                              onPressed: _removeImage,
+                              child: Icon(Icons.delete),
+                              style: ButtonStyle(
+                                shape:
+                                    MaterialStateProperty.all<
+                                      RoundedRectangleBorder
+                                    >(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 40),
+                        Row(
+                          children: [
+                            Text(
+                              "Category",
+                              style: TextStyle(
+                                fontSize: 28,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black,
+                              ),
+                            ),
+                            Spacer(),
+                            ToggleButtons(
+                              onPressed: (int index) {
+                                setState(() {
+                                  for (
+                                    int i = 0;
+                                    i < _selectedType.length;
+                                    i++
+                                  ) {
+                                    _selectedType[i] = i == index;
+                                  }
+                                });
+                              },
+                              borderRadius: BorderRadius.circular(10),
+                              selectedBorderColor: Theme.of(
+                                context,
+                              ).primaryColor,
+                              constraints: BoxConstraints(
+                                minHeight: 40,
+                                minWidth: 100,
+                              ),
+                              children: type,
+                              isSelected: _selectedType,
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 40),
+                        Container(
+                          width: double.infinity,
+                          height: 50,
+                          child: CustomElevatedButton(
+                            onPressed: () {},
+                            text: "Post",
+                          ),
+                        ),
                       ],
                     ),
                   ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PostCard extends StatelessWidget {
   final Color backgroundColor;
@@ -8,6 +9,8 @@ class PostCard extends StatelessWidget {
   final String description;
   final String image;
   final String type;
+  final Color shadowColor;
+  final String phoneNumber;
 
   const PostCard({
     super.key,
@@ -18,12 +21,29 @@ class PostCard extends StatelessWidget {
     required this.image,
     required this.type,
     required this.typeColor,
+    required this.shadowColor,
+    required this.phoneNumber,
   });
+
+  Future<void> launchDialer(String phoneNumber) async {
+    String cleanNumber = phoneNumber.replaceAll(RegExp(r'[^\d+]'), '');
+    final Uri launchUri = Uri(scheme: "tel", path: cleanNumber);
+
+    try {
+      bool canLaunch = await canLaunchUrl(launchUri);
+      if (canLaunch) {
+        await launchUrl(launchUri);
+      }
+    } catch (e) {
+      print("Error launching dialer: $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 5,
+      // elevation: 1,
+      shadowColor: shadowColor,
       color: backgroundColor.withOpacity(0.5),
       child: Padding(
         padding: const EdgeInsets.only(left: 15, right: 15),
@@ -56,7 +76,9 @@ class PostCard extends StatelessWidget {
                 Spacer(),
                 //phone
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    launchDialer(phoneNumber);
+                  },
                   child: Icon(Icons.phone, color: Colors.white),
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(30, 30),

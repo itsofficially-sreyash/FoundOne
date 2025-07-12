@@ -2,6 +2,7 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:found_one/presentation/widgets/post_card.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,6 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Map<String, String>> _allPosts = [
     {
       "name": "Vivek Sharma",
+      "phoneNumber": "9638527410",
       "title": "Selling earbuds",
       "type": "Sale",
       "image":
@@ -23,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
     },
     {
       "name": "Vivek Sharma",
+      "phoneNumber": "9638527410",
       "title": "Selling earbuds",
       "type": "Lost",
       "image":
@@ -32,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
     },
     {
       "name": "Vivek Sharma",
+      "phoneNumber": "6549873210",
       "title": "Selling earbuds",
       "type": "Sale",
       "image":
@@ -41,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
     },
     {
       "name": "Vivek Sharma",
+      "phoneNumber": "3214569870",
       "title": "Selling socks",
       "type": "Lost",
       "image":
@@ -143,7 +148,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         Spacer(),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.popAndPushNamed(context, '/login');
+                          },
                           icon: Icon(Icons.logout),
                           iconSize: 25,
                           color: Colors.white,
@@ -171,12 +178,19 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             child: _foundItem.isNotEmpty
                 ? ListView.separated(
-                  separatorBuilder: (BuildContext context, int index) => const Divider(),
+                    separatorBuilder: (BuildContext context, int index) =>
+                        const Divider(),
                     padding: EdgeInsets.all(10.0),
                     scrollDirection: Axis.vertical,
                     itemCount: _foundItem.length,
                     itemBuilder: (context, index) {
                       return PostCard(
+                        phoneNumber: _foundItem[index]["phoneNumber"]
+                            .toString(),
+                        shadowColor:
+                            _foundItem[index]["type"].toString() == "Sale"
+                            ? Color(0xffBFEAFD)
+                            : Color(0xffFFD5C7),
                         backgroundColor:
                             _foundItem[index]["type"].toString() == "Sale"
                             ? Color(0xffBFEAFD)
