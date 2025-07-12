@@ -68,7 +68,7 @@ lib/
 ### 🔧 Run Locally
 
 ```bash
-git clone https://github.com/yourusername/foundone.git
+git clone https://github.com/itsofficially-sreyash/foundone.git
 cd foundone
 flutter pub get
 flutter run
