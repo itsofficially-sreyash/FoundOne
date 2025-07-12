@@ -1,16 +1,93 @@
-# found_one
+# 📱 FoundOne
 
-A new Flutter project.
+> **Organize lost, found, and resale items on campus — smarter than WhatsApp groups.**  
+> A real-time Flutter + Firebase app with clean architecture and OTP-based user verification.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🧩 Overview
 
-A few resources to get you started if this is your first Flutter project:
+**FoundOne** is a campus utility app that helps students manage lost & found items and resale listings in a structured, searchable, and trustworthy environment — unlike cluttered WhatsApp groups.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## ✨ Features
+
+- 🔐 **Custom Auth Flow** (Name + Phone + OTP via Firebase Auth)
+- 🏷️ **Create Categorized Posts** (Lost, Found, Sale)
+- 🧠 **Real-Time Feed** (Firestore Stream)
+- 📸 **Image Uploads** (Firebase Storage)
+- ✅ **Post Resolution** ("Mark as Found/Sold")
+- 🔎 **Keyword Search Bar**
+- 🧱 **Clean Architecture** (Domain-Driven, Scalable)
+- ⚡ **Provider State Management**
+
+---
+
+## 🧪 Tech Stack
+
+- **Flutter 3.x**
+- **Firebase Auth** (Phone OTP)
+- **Cloud Firestore**
+- **Firebase Storage**
+- **Provider**
+- **Clean Architecture** (3-layer: Presentation / Domain / Data)
+
+---
+
+## 📁 Folder Structure (Clean Architecture)
+
+```
+
+lib/
+├── presentation/
+│   └── screens/     # All UI screens (auth, home, post)
+│   └── providers/   # All UI-facing logic and state
+├── domain/
+│   └── entities/    # Core business entities (User, Post)
+│   └── usecases/    # Application-level actions
+│   └── repositories/ # Abstract contracts
+├── data/
+│   └── datasources/ # Firebase Auth & Firestore integration
+│   └── models/      # DTOs (PostModel, UserModel)
+│   └── repositories/ # Impl of domain contracts
+
+````
+
+## 🧑‍💻 Getting Started
+
+### 🚀 Firebase Setup
+
+1. Create a Firebase project
+2. Enable:
+   - Phone Authentication
+   - Cloud Firestore
+   - Firebase Storage
+3. Download `google-services.json` and add it to `android/app/`
+
+### 🔧 Run Locally
+
+```bash
+git clone https://github.com/yourusername/foundone.git
+cd foundone
+flutter pub get
+flutter run
+````
+
+---
+
+## 📌 Future Roadmap
+
+* 🧑‍💬 In-app Chat between finder & owner
+* 🔔 Push Notifications for matched/resolved items
+* 🌐 Multi-campus or institution support
+* 🔍 Advanced filters (location, category, date)
+* 💬 Feedback/Support ticket system
+
+---
+
+## 🙌 Contribution
+
+Pull requests are welcome! For major changes, please open an issue first.
+
+If you’re a student or open-source contributor and want to collaborate, message me directly.
