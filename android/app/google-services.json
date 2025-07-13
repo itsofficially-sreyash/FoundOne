@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "683688744655",
+    "project_id": "foundone-42999",
+    "storage_bucket": "foundone-42999.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:683688744655:android:e42497511d6288da5389ba",
+        "android_client_info": {
+          "package_name": "com.example.found_one"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2CDK52IxNOnTCsJb-cYV4iaXM-CMZ4zA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
